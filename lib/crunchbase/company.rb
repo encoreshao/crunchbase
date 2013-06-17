@@ -13,8 +13,10 @@ module Crunchbase
       :deadpooled_url, :email_address, :phone_number, :description, 
       :created_at, :updated_at, :overview, :image, :competitions, 
       :total_money_raised, :funding_rounds, :acquisition, :acquisitions,
-      :offices, :ipo, :video_embeds, :screenshots, :external_links
-    
+      :offices, :ipo, :video_embeds, :screenshots, :external_links, 
+      :tag_list, :alias_list, :founded_year, :founded_month, :founded_day, 
+      :deadpooled_year
+      
     def initialize(json)
       @name = json["name"]
       @permalink = json["permalink"]
