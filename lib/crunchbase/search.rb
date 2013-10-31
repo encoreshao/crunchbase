@@ -15,13 +15,22 @@ module Crunchbase
   class Search
     include Enumerable
     
-    attr_reader :size, :crunchbase_url
+    attr_reader :size, :crunchbase_url, :results
     alias :length :size
     
     # Performs a Crunchbase search for query.
     def self.find(query)
       j = API.search(query)
-      s = Search.new(query, j)
+      real_find query, j
+    end
+
+    def self.find_company(query, page=1)
+      j = API.search_with_company(query, page)
+      real_find query, j
+    end
+
+    def self.real_find(query, j)
+      Search.new(query, j)
     end
     
     def initialize(query, json)
@@ -66,12 +75,13 @@ module Crunchbase
     
     # Inserts items into the results array from the retrieved search page
     def populate_results(json)
-      page = json["page"]
-      results = json["results"].map{|r| SearchResult.new(r)}
-      start = (page - 1) * 10
-      @results[start, results.length] = results
+      # page = json["page"]
+      # results = json["results"].map{|r| SearchResult.new(r)}
+      # start = (page - 1) * 10
+      # @results[start, results.length] = results
+      @results = json["results"].map{|r| SearchResult.new(r)}
     end
-    
+
     # Retrieves the search page containing the given index
     def retrieve_for_index(index)
       page = (index / 10) + 1
