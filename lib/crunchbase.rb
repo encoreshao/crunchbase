@@ -21,5 +21,5 @@ require 'crunchbase/search_result'
 require 'crunchbase/crunch_exception'
 
 module Crunchbase
-  VERSION = "0.4.0"
+  VERSION = "0.5.1"
 end
