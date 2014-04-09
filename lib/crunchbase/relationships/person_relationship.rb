@@ -1,7 +1,7 @@
 module Crunchbase
   class PersonRelationship < Relationship
     
-    attr_reader :person_first_name, :person_last_name, :person_permalink
+    attr_reader :person_first_name, :person_last_name, :person_permalink, :is_past
     
     def self.array_from_relationship_list #:nodoc:
       raise CrunchException, "Method must be called from superclass Relationship"

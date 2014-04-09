@@ -15,7 +15,7 @@ module Crunchbase
       :total_money_raised, :funding_rounds, :acquisition, :acquisitions,
       :offices, :ipo, :video_embeds, :screenshots, :external_links, 
       :tag_list, :alias_list, :founded_year, :founded_month, :founded_day, 
-      :deadpooled_year
+      :deadpooled_year, :deadpooled_month, :deadpooled_day, :partners
       
     def initialize(json)
       @name = json["name"]
@@ -58,6 +58,7 @@ module Crunchbase
       @video_embeds = json["video_embeds"]
       @screenshots = json["screenshots"]
       @external_links = json["external_links"]
+      @partners = json["partners"]
     end
 
     def relationships

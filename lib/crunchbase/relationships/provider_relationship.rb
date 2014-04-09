@@ -1,7 +1,7 @@
 module Crunchbase
   class ProviderRelationship < Relationship
     
-    attr_reader :provider_name, :provider_permalink
+    attr_reader :provider_name, :provider_permalink, :is_past, :title
     
     def self.array_from_relationship_list #:nodoc:
       raise CrunchException, "Method must be called from superclass Relationship"

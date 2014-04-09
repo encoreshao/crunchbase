@@ -6,7 +6,7 @@ module Crunchbase
     
     attr_reader :funding_round_code, :funding_source_url,
       :funding_source_description, :raised_amount, :raised_currency_code, 
-      :company_name, :company_permalink
+      :company_name, :company_permalink, :funded_year, :funded_month, :funded_day
     
     def initialize(hash)
       hash = hash["funding_round"]
