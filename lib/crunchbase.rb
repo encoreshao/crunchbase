@@ -19,7 +19,8 @@ require 'crunchbase/entity_list_item'
 require 'crunchbase/search'
 require 'crunchbase/search_result'
 require 'crunchbase/crunch_exception'
+require 'crunchbase/degree'
 
 module Crunchbase
-  VERSION = "0.5.1"
+  VERSION = "0.5.2"
 end

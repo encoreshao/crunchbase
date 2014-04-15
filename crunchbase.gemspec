@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = "crunchbase"
-  s.version = "0.5.1"
+  s.version = "0.5.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Tyler Cunnion"]
@@ -42,6 +42,7 @@ Gem::Specification.new do |s|
     "lib/crunchbase/search.rb",
     "lib/crunchbase/search_result.rb",
     "lib/crunchbase/service_provider.rb",
+    "lib/crunchbase/degree.rb",
     "spec/apikey.example.yml",
     "spec/crunchbase/api_spec.rb",
     "spec/crunchbase/company_spec.rb",
