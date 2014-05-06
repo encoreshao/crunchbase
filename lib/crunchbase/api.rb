@@ -16,19 +16,26 @@ module Crunchbase
   # JSON returned from the API. You should probably be using the factory
   # methods provided on each entity class instead of calling these directly.
   class API
-    CB_URL = 'http://api.crunchbase.com/v/1/'
     SUPPORTED_ENTITIES = ['person', 'company', 'financial-organization', 'product', 'service-provider']
     @timeout_limit = 60
     @redirect_limit = 2
-    class << self; attr_accessor :timeout_limit, :redirect_limit, :key end
-    
+    @version = '1'
+    @base_url = 'http://api.crunchbase.com/'
+    class << self
+      attr_accessor :timeout_limit, :redirect_limit, :key, :base_url, :version 
+
+      def api_url
+        base_url.gsub(/\/$/, '') + '/v/' + version + '/'
+      end
+    end
+
     def self.single_entity(permalink, entity_name)
       raise CrunchException, "Unsupported Entity Type" unless SUPPORTED_ENTITIES.include?(entity_name)
       fetch(permalink, entity_name)
     end
     
     def self.all(entity)
-      uri = CB_URL + entity + ".js"
+      uri = api_url + entity + ".js"
       get_json_response(uri)
     end
     
@@ -45,21 +52,21 @@ module Crunchbase
 
     # Fetches URI for the permalink interface.
     def self.fetch(permalink, object_name)
-      uri = CB_URL + "#{object_name}/#{permalink}.js"
+      uri = api_url + "#{object_name}/#{permalink}.js"
       get_json_response(uri)
     end
     
     # Fetches URI for the search interface.
     def self.search(query, page=1)
       require "cgi"
-      uri = CB_URL + "search.js?query=#{CGI.escape(query)}&page=#{page}"
+      uri = api_url + "search.js?query=#{CGI.escape(query)}&page=#{page}"
       get_json_response(uri)
     end
     
     # Fetches URI for the search interface.
     def self.search_with_company(query, page=1)
       require "cgi"
-      uri = CB_URL + "search.js?query=#{CGI.escape(query)}&entity=company&page=#{page}"
+      uri = api_url + "search.js?query=#{CGI.escape(query)}&entity=company&page=#{page}"
       get_json_response(uri)
     end
 
@@ -67,7 +74,7 @@ module Crunchbase
     def self.permalink(parameters, category)
       require "cgi"
       qs = parameters.map{|k,v| "#{CGI.escape(k.to_s)}=#{CGI.escape(v)}"}.join('&')
-      uri = CB_URL + "#{category}/permalink?#{qs}"
+      uri = api_url + "#{category}/permalink?#{qs}"
       get_json_response(uri)
     end
     
