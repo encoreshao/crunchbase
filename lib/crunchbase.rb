@@ -22,5 +22,5 @@ require 'crunchbase/crunch_exception'
 require 'crunchbase/degree'
 
 module Crunchbase
-  VERSION = "0.5.2"
+  VERSION = "0.5.3"
 end
